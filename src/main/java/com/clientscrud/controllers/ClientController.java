@@ -31,8 +31,4 @@ public class ClientController {
         return "Client inserted successfully";
     }
 
-    @GetMapping("/test")  // Asegúrate de que este endpoint esté aquí
-    public String test() {
-        return "API is working!";
-    }
 }
