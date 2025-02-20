@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ClientscrudApplication<clientscrud>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.clientscrud.ClientscrudApplication",
+            "projectName": "clientscrud",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
