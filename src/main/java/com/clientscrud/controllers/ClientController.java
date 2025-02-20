@@ -14,21 +14,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.clientscrud.models.ClientModel;
 import com.clientscrud.services.ClientServices;
+import dto.ClientDTO;
 
 @RestController
 @RequestMapping("/api/clients")
 public class ClientController {
+
     @Autowired
-    public ClientServices clientServices;
+    private ClientServices clientServices;
 
     @GetMapping("/findAll")
-    public List<ClientModel> getClients() {
+    public List<ClientDTO> getClients() {
         return clientServices.findAll();
-
     }
 
     @GetMapping("/find")
-    public ClientModel getClientById(@RequestParam("id") Long id) {
+    public ClientDTO getClientById(@RequestParam("id") Long id) {
         return clientServices.findById(id);
     }
 
@@ -41,7 +42,7 @@ public class ClientController {
     @PostMapping("/insert")
     public String insertClient(@RequestBody ClientModel client) {
         clientServices.insertClient(client);
-        return "Client inserted successfully added ( " + client.toString() + " )";
+        return "Client inserted successfully";
     }
 
     @PutMapping("/update")
@@ -50,4 +51,21 @@ public class ClientController {
         return "Client updated successfully";
     }
 
+    @PostMapping("/recharge")
+    public String rechargeBalance(@RequestParam("id") Long id, @RequestParam("amount") Double amount) {
+        clientServices.rechargeBalance(id, amount);
+        return "Balance recharged successfully by " + amount + " $";
+    }
+
+    @PostMapping("/spend")
+    public String spendBalance(@RequestParam("id") Long id, @RequestParam("amount") Double amount,
+            @RequestParam("description") String description) {
+        clientServices.spendBalance(id, amount, description);
+        return "Balance spent successfully";
+    }
+
+    @GetMapping("/balance")
+    public String getBalance(@RequestParam("id") Long id) {
+        return clientServices.getBalance(id);
+    }
 }
