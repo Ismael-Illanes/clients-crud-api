@@ -19,7 +19,7 @@ import jakarta.persistence.Table;
 @Table(name = "clients")
 public class ClientModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true)
     private Long id;
 
