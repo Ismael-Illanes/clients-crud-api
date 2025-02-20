@@ -1,15 +1,7 @@
 package com.clientscrud.models;
-
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Getter
 @Setter
@@ -41,6 +33,25 @@ public class ClientModel {
     @Column(name = "updated_at")
     private String updatedAt;
 
+    @Column(name = "balance")
+    private Double balance;
+
+    @Column(name = "last_recharge")
+    private Double lastRecharge;
+
+    @Column(name = "total_recharge")
+    private Double totalRecharge;
+
+    @Column(name = "last_expense")
+    private Double lastExpense;
+
+    @Column(name = "total_expense")
+    private Double totalExpense;
+
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private WalletModel wallet;
+    
     @Override
     public String toString() {
         return "ClientModel{" +
@@ -51,6 +62,11 @@ public class ClientModel {
                 ", address='" + address + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
+                ", balance=" + balance +
+                ", lastRecharge=" + lastRecharge +
+                ", totalRecharge=" + totalRecharge +
+                ", lastExpense=" + lastExpense +
+                ", totalExpense=" + totalExpense +
                 '}';
     }
 }

@@ -15,16 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.clientscrud.models.ClientModel;
 import com.clientscrud.services.ClientServices;
 
+import dto.ClientDTO;
+
 @RestController
 @RequestMapping("/api/clients")
 public class ClientController {
+
     @Autowired
-    public ClientServices clientServices;
+    private ClientServices clientServices;
 
     @GetMapping("/findAll")
-    public List<ClientModel> getClients() {
+    public List<ClientDTO> getClients() {
         return clientServices.findAll();
-
     }
 
     @GetMapping("/find")
@@ -50,4 +52,15 @@ public class ClientController {
         return "Client updated successfully";
     }
 
+    @PostMapping("/recharge")
+    public String rechargeBalance(@RequestParam("id") Long id, @RequestParam("amount") Double amount) {
+        clientServices.rechargeBalance(id, amount);
+        return "Balance recharged successfully"+ amount + " $";
+    }
+
+    @PostMapping("/spend")
+    public String spendBalance(@RequestParam("id") Long id, @RequestParam("amount") Double amount, @RequestParam("description") String description) {
+        clientServices.spendBalance(id, amount, description);
+        return "Balance spent successfully";
+    }
 }
