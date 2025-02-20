@@ -10,6 +10,7 @@ This is a simple **CRUD API** for managing clients, built with **Spring Boot** a
 - 📝 Update client details
 - ❌ Delete clients
 - 📅 Automatically manage timestamps (created_at & updated_at)
+- 💼 **Wallet Management**: Each client has a wallet to track expenses, recharges, and total expenses.
 
 ## 🏗️ Technologies Used
 - 🌱 **Spring Boot** - Java framework for building applications
@@ -27,6 +28,9 @@ This is a simple **CRUD API** for managing clients, built with **Spring Boot** a
 | 📃 **GET** | `/api/clients/findAll` | List all clients |
 | ✏️ **PUT** | `/api/clients/update` | Update a client |
 | ❌ **DELETE** | `/api/clients/delete` | Delete a client |
+| 💳 **GET** | `/api/clients/balance` | Get client balance |
+| 💵 **POST** | `/api/clients/recharge` | Recharge client balance |
+| 💸 **POST** | `/api/clients/spend` | Record client expense |
 
 ## ⚙️ Installation & Usage
 ### 🔧 Prerequisites
@@ -41,7 +45,8 @@ git clone https://github.com/Ismael-Illanes/clientscrud.git
 cd client-crud-api
 
 # Build and run the application
-mvn spring-boot:run
+mvn spring-boot\:run
+
 ```
 
 ### 🔌 API Testing
