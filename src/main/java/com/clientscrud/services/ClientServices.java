@@ -22,7 +22,11 @@ public class ClientServices {
     }
 
     public ClientModel findById(Long id) {
-        return clientRepository.findById(id).map(p -> p.getId() == id ? p : null).orElse(null);
+        if (id == null) {
+            throw new IllegalArgumentException("Client ID cannot be null");
+        }
+        return clientRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Client with ID " + id + " not found."));
     }
 
     @Transactional
