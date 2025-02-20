@@ -37,7 +37,7 @@ This is a simple **CRUD API** for managing clients, built with **Spring Boot** a
 ### 🚀 Running the Project
 ```sh
 # Clone the repository
-git clone [https://github.com/your-repo/client-crud-api.git](https://github.com/Ismael-Illanes/clientscrud.git)
+git clone https://github.com/Ismael-Illanes/clientscrud.git
 cd client-crud-api
 
 # Build and run the application
@@ -63,5 +63,5 @@ Feel free to fork the repo, submit issues, or contribute by creating pull reques
 This project is licensed under the **MIT License**.
 
 ---
-🔗 **Developed by: Ismael-Illanes | 🌍 _yourwebsite.com_ | ✉️ _your.email@example.com_
+🔗 **Developed by: Ismael-Illanes | 🌍 https://github.com/Ismael-Illanes | ✉️ ismael@villasana.dev
 
