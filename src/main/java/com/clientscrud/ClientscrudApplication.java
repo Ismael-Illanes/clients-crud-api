@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import io.github.cdimascio.dotenv.Dotenv;
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.clientscrud")
+
 public class ClientscrudApplication {
 
 	public static void main(String[] args) {

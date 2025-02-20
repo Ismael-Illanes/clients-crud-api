@@ -1,21 +1,22 @@
-package controllers;
+package com.clientscrud.controllers;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import models.ClientModel;
-import services.ClientServices;
+import com.clientscrud.models.ClientModel;
+import com.clientscrud.services.ClientServices;
 
-@RequestMapping("/api")
 @RestController
+@RequestMapping("/api")
 public class ClientController {
     @Autowired
-    private ClientServices clientServices;
+    public ClientServices clientServices;
 
     @GetMapping("/find/clients")
     public List<ClientModel> getClients() {
@@ -23,10 +24,15 @@ public class ClientController {
 
     }
 
-    @PostMapping("/insert/client")
+    @PostMapping("/insert")
 
-    public String insertClient() {
-        clientServices.insertClient();
+    public String insertClient(@RequestBody ClientModel client) {
+        clientServices.insertClient(client);
         return "Client inserted successfully";
+    }
+
+    @GetMapping("/test")  // Asegúrate de que este endpoint esté aquí
+    public String test() {
+        return "API is working!";
     }
 }

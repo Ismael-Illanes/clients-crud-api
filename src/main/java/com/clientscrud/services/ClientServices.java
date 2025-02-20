@@ -1,13 +1,14 @@
-package services;
+package com.clientscrud.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.clientscrud.models.ClientModel;
+
 import jakarta.transaction.Transactional;
-import models.ClientModel;
-import repository.ClientRepository;
+import com.clientscrud.repository.*;;
 
 @Service
 public class ClientServices {
@@ -20,10 +21,8 @@ public class ClientServices {
     }
 
     @Transactional
-    public void insertClient() {
-        ClientModel client = new ClientModel(null, "Ismael", "ismael@gmail.com", "123456789", "123 Main Street");
-
-        clientRepository.save(client);
+    public ClientModel insertClient(ClientModel client) {
         System.out.println("Client inserted successfully ( " + client.toString() + " )");
+        return clientRepository.save(client);
     }
 }

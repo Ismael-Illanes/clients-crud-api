@@ -1,4 +1,4 @@
-package models;
+package com.clientscrud.models;
 
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ import jakarta.persistence.Table;
 @Table(name = "clients")
 public class ClientModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Asegúrate de que el campo en Supabase sea SERIAL
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  
     @Column(name = "id", unique = true)
     private Long id;
 
