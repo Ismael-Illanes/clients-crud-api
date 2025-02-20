@@ -23,6 +23,8 @@ public class ClientServices {
     @Transactional
     public ClientModel insertClient(ClientModel client) {
         System.out.println("Client inserted successfully ( " + client.toString() + " )");
+        client.setUpdatedAt(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss:SSS")));
+        client.setCreatedAt(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss:SSS")));
         return clientRepository.save(client);
     }
 }

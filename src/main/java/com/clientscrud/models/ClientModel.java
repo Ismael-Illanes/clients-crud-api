@@ -35,6 +35,11 @@ public class ClientModel {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "created_at")
+    private String createdAt;
+
+    @Column(name = "updated_at")
+    private String updatedAt;
 
     @Override
     public String toString() {
@@ -44,6 +49,8 @@ public class ClientModel {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", updatedAt='" + updatedAt + '\'' +
                 '}';
     }
 }
