@@ -16,18 +16,18 @@ import com.clientscrud.models.ClientModel;
 import com.clientscrud.services.ClientServices;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/clients")
 public class ClientController {
     @Autowired
     public ClientServices clientServices;
 
-    @GetMapping("/find/client/all")
+    @GetMapping("/findAll")
     public List<ClientModel> getClients() {
         return clientServices.findAll();
 
     }
 
-    @GetMapping("/find/client")
+    @GetMapping("/find/")
     public ClientModel getClientById(@RequestParam("id") Long id) {
         return clientServices.findById(id);
     }
