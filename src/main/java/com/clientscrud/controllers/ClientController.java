@@ -27,7 +27,7 @@ public class ClientController {
 
     }
 
-    @GetMapping("/find/")
+    @GetMapping("/find")
     public ClientModel getClientById(@RequestParam("id") Long id) {
         return clientServices.findById(id);
     }
