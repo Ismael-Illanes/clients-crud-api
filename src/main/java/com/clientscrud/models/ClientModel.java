@@ -1,5 +1,5 @@
 package com.clientscrud.models;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -49,9 +49,9 @@ public class ClientModel {
     private Double totalExpense;
 
     @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
+
     private WalletModel wallet;
-    
+
     @Override
     public String toString() {
         return "ClientModel{" +

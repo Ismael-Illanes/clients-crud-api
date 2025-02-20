@@ -3,6 +3,7 @@ package com.clientscrud.services;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.clientscrud.repository.ClientRepository;
 import com.clientscrud.repository.ExpenseRepository;
 
 import dto.ClientDTO;
+
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
@@ -28,18 +30,38 @@ public class ClientServices {
     private ExpenseRepository expenseRepository;
 
     public List<ClientDTO> findAll() {
-        List<ClientModel> clients = clientRepository.findAll();
-        return clients.stream()
-        .map(ClientDTO::new)
-        .collect(Collectors.toList());
+        return clientRepository.findAll().stream()
+                .map(client -> {
+                    Double totalExpenseAmount = client.getWallet().getExpenses().stream()
+                            .mapToDouble(ExpenseModel::getAmount)
+                            .sum();
+                    return new ClientDTO(client, totalExpenseAmount);
+                })
+                .collect(Collectors.toList());
     }
 
-    public ClientModel findById(Long id) {
+    public ClientDTO findById(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("Client ID cannot be null");
         }
-        return clientRepository.findById(id)
+        Optional<ClientModel> optionalClient = clientRepository.findById(id);
+        if (optionalClient.isEmpty()) {
+            throw new EntityNotFoundException("Client with ID " + id + " not found.");
+        }
+        ClientModel client = optionalClient.get();
+        Double totalExpenseAmount = client.getWallet().getExpenses().stream()
+                .mapToDouble(ExpenseModel::getAmount)
+                .sum();
+        return new ClientDTO(client, totalExpenseAmount);
+    }
+
+    public String getBalance(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Client ID cannot be null");
+        }
+        ClientModel client = clientRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Client with ID " + id + " not found."));
+        return client.getName() + "'s balance: " + client.getBalance() + " $";
     }
 
     @Transactional
@@ -55,8 +77,11 @@ public class ClientServices {
 
     @Transactional
     public String insertClient(ClientModel client) {
-        client.setUpdatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss:SSS")));
-        client.setCreatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss:SSS")));
+        LocalDateTime now = LocalDateTime.now();
+        String formattedDateTime = now.format(DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss:SSS"));
+
+        client.setCreatedAt(formattedDateTime);
+        client.setUpdatedAt(formattedDateTime);
         client.setBalance(0.0);
         client.setLastRecharge(0.0);
         client.setTotalRecharge(0.0);

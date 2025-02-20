@@ -6,5 +6,5 @@ import com.clientscrud.models.ExpenseModel;
 
 @Repository
 public interface ExpenseRepository extends JpaRepository<ExpenseModel, Long> {
-    // Puedes añadir consultas personalizadas aquí si es necesario
+
 }
