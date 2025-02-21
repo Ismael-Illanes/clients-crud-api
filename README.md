@@ -41,7 +41,7 @@ This is a simple **CRUD API** for managing clients, built with **Spring Boot** a
 ### 🚀 Running the Project
 ```sh
 # Clone the repository
-git clone https://github.com/Ismael-Illanes/clientscrud.git
+git clone https://github.com/Ismael-Illanes/clients-crud-api.git
 cd client-crud-api
 
 # Build and run the application
