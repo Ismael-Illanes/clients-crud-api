@@ -17,7 +17,7 @@ import com.clientscrud.services.ClientServices;
 import dto.ClientDTO;
 
 @RestController
-@RequestMapping("/api/clients")
+@RequestMapping("/clients")
 public class ClientController {
 
     @Autowired
