@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,11 +22,14 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class ClientServices {
 
-    @Autowired
-    private ClientRepository clientRepository;
+    private final ClientRepository clientRepository;
 
-    @Autowired
-    private ExpenseRepository expenseRepository;
+    private final ExpenseRepository expenseRepository;
+
+    public ClientServices(ClientRepository clientRepository, ExpenseRepository expenseRepository) {
+        this.clientRepository = clientRepository;
+        this.expenseRepository = expenseRepository;
+    }
 
     public List<ClientDTO> findAll() {
         return clientRepository.findAll().stream()
@@ -76,7 +78,7 @@ public class ClientServices {
     }
 
     @Transactional
-    public String insertClient(ClientModel client) {
+    public void insertClient(ClientModel client) {
         LocalDateTime now = LocalDateTime.now();
         String formattedDateTime = now.format(DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss:SSS"));
 
@@ -93,7 +95,6 @@ public class ClientServices {
         client.setWallet(wallet);
 
         clientRepository.save(client);
-        return "Client inserted successfully";
     }
 
     @Transactional

@@ -49,7 +49,6 @@ public class ClientModel {
     private Double totalExpense;
 
     @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-
     private WalletModel wallet;
 
     @Override

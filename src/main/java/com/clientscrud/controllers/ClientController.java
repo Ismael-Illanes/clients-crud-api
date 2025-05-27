@@ -2,7 +2,6 @@ package com.clientscrud.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +19,11 @@ import dto.ClientDTO;
 @RequestMapping("/clients")
 public class ClientController {
 
-    @Autowired
-    private ClientServices clientServices;
+    private final ClientServices clientServices;
+
+    public ClientController(ClientServices clientServices) {
+        this.clientServices = clientServices;
+    }
 
     @GetMapping("/findAll")
     public List<ClientDTO> getClients() {
